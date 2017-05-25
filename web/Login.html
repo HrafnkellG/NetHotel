@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <link rel="stylesheet" href="Login.css" type="text/css" />
+        <title>NetHotel login</title>
+        
+        <script type="text/javascript" src="scripts/jq/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="login.js"></script>
+    </head>
+    <body onload="FocusID()">
+        <div id="container">
+            <div id="title"></div>
+            <form id="formLogin" action="ProcessLogin">
+                <div id="input_fields">
+                    <div id="user_name">
+                        <div id="img_name"></div>
+                        <div id="txt_name">
+                            <input type="text" name="id" id="nameBox" value="" onkeypress="KeypressOnName(event)" />
+                        </div>
+                    </div>
+                    
+                    <div id="user_pass">
+                        <div id="img_pass"></div>
+                        <div id="txt_pass">
+                            <input type="password" name="password" id="passwBox" value="" onkeypress="KeypressOnPassword(event)" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            <br />
+            <p style="font-size: x-large; color: white;" id="enTxt">This is a demo, enter 'all' for the user and 'open' as the password.</p>
+            
+            <p style="font-size: x-large; color: white;" id="isTxt">Þetta er sýnishorn, sláið inn 'all' fyrir notandann og 'open' sem aðgangsorðið.</p>
+            
+        </div>
+    </body>
+</html>

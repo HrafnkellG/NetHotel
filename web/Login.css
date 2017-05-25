@@ -1,0 +1,100 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: rgb(71,138,255);
+    background-image: url(background.png);
+    background-repeat: repeat-x;
+}
+
+/*** The div which contains all the content ***/
+#container {
+    /*background-color: LightBlue;*/
+    padding: 10px 0 0 0;
+    width: 300px;
+    height: 196px;
+    margin: 10px auto 10px;
+}
+
+#title {
+    /*background-color: AliceBlue;*/
+    background-image: url(title.png);
+    padding: 0;
+    margin: 0;
+    width: 280px;
+    height: 50px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+/*** Holds other divs which contain : label/image + input ***/
+#input_fields {
+    /*background-color: Bisque;*/
+    border: 3px outset LightBlue;
+    padding: 0;
+    margin: 0;
+    width: 274px;
+    height: 110px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+}
+
+#user_pass {
+    /*background-color: Chocolate;*/
+    padding: 0;
+    margin: 0;
+    width: 264px;
+    height: 50px;
+    margin-left: 5px;
+}
+
+/*** Format the div holding the key pic ***/
+#img_pass {
+    background-image: url(passT.png);
+    width: 50px;
+    height: 50px;
+}
+
+/*** Format the div holding input field ***/
+#txt_pass {
+    /*background-color: Plum;*/
+    width: 204px;
+    height: 38px;
+    position: relative;
+    left: 60px;
+    bottom: 50px;
+    padding-top: 12px;
+}
+#txt_pass input {
+    width: 198px;
+}
+
+#user_name {
+    /*background-color: Chocolate;*/
+    padding: 0;
+    margin: 0;
+    width: 264px;
+    height: 50px;
+    margin-left: 5px;
+}
+
+/*** Format the div holding the key pic ***/
+#img_name {
+    background-image: url(userT.png);
+    width: 50px;
+    height: 50px;
+}
+
+/*** Format the div holding input field ***/
+#txt_name {
+    /*background-color: Plum;*/
+    width: 204px;
+    height: 38px;
+    position: relative;
+    left: 60px;
+    bottom: 50px;
+    padding-top: 22px;
+}
+#txt_name input {
+    width: 198px;
+}

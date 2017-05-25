@@ -1,0 +1,78 @@
+https://www.youtube.com/watch?v=jV6pC2PQxGk&list=PLgYopQWwsyjGPhxay1JTvdRQi5zgYhNYe	
+Edit reservation [snyrta]
+
+Main->List reservations
+
+helpconfig adjust db load [locale]
+
+finish help for the main page (sections for the tabs)
+
+pricelist: when changes are made to the ROOM table they must be reflected in the PITEMS table.
+
+customers page: activate help button on the 'new' and 'edit' dialogs
+
+pricelists page: enable "Copy to new" button
+
+
+
+===============================
+	F I N I S H E D
+===============================
+
+reservation page
+
+create customers page
+	: buttons on edit dialog
+	: edit -> pricelist not selected right
+
+help for pricelist page
+
+create pricelists page
+
+Help for the HotelConfig page
+
+Data table PITEMS: 
+	change the monetary values from decimal -> bigint (64bit int)
+	When displaying, first convert to double, then divide by the ratio
+	between the whole and fractional part of the currency, if the currency
+	for the locale has a fractional part.
+	Input from the user is parsed into a double which is multiplied by the ratio
+	and converted into a bigint, which is stored in the database.
+
+
+
+----+----+----+----+----+----+----+----+----+----+----*
+    |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |
+----+----+----+----+----+----+----+----+----+----+----+
+I   | W  | W  | L  |    |    |    |    |    |    |    | W
+----+----+----+----+----+----+----+----+----+----+----+
+II  | W  | W  | W  |    |    |    |    |    |    |    | B
+----+----+----+----+----+----+----+----+----+----+----+
+III | W  | w  | W  |    |    |    |    |    |    |    | W
+----+----+----+----+----+----+----+----+----+----+----+
+IV  | L  | L  | W  |    |    |    |    |    |    |    | B
+----+----+----+----+----+----+----+----+----+----+----+
+V   | W  | W  | W  |    |    |    |    |    |    |    | W
+----+----+----+----+----+----+----+----+----+----+----+
+VI  | X  | X  | X  |    |    |    |    |    |    |    | B
+----+----+----+----+----+----+----+----+----+----+----+
+
+
+
+
+
+----+----+----+----+----+----+----+----+----+----+----*
+    |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |
+----+----+----+----+----+----+----+----+----+----+----+
+I   | w  |    |    |    |    |    |    |    |    |    | W
+----+----+----+----+----+----+----+----+----+----+----+
+II  |    |    |    |    |    |    |    |    |    |    | B
+----+----+----+----+----+----+----+----+----+----+----+
+III |    |    |    |    |    |    |    |    |    |    | W
+----+----+----+----+----+----+----+----+----+----+----+
+IV  |    |    |    |    |    |    |    |    |    |    | B
+----+----+----+----+----+----+----+----+----+----+----+
+V   |    |    |    |    |    |    |    |    |    |    | W
+----+----+----+----+----+----+----+----+----+----+----+
+VI  |    |    |    |    |    |    |    |    |    |    | B
+----+----+----+----+----+----+----+----+----+----+----+

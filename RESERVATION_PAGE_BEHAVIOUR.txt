@@ -1,0 +1,21 @@
+Reservation page behaviour
+==========================
+
+Dates: from must always be less than to
+       so if the user selects "from" that comes after "to" then
+       the "to" is set to 1 day later than the "from" and vice versa.
+
+Nights: this number controls the date field "to", when changed the
+        "to" field is adjusted accordingly
+        conversely, when either "from" or "to" is changed this field
+        is set accordingly
+
+Guests: this number affects the "rooms" field, when changed it computes
+        the minimum number of rooms needed to satisfy the request.
+        e.g. if the number is 5 and there is one room of size 4 and another
+        of size 1 available then the no. of rooms is 2
+        i.e. it uses the largest rooms available to compute the number
+
+no overbook: if "no. of rooms" is larger than availble rooms this is indicated
+             in some visual way, perhaps changing the background color of
+             the field and/or adding som pop-up text explaining why

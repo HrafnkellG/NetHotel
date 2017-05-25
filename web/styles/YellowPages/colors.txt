@@ -1,0 +1,29 @@
+header
+----------------------------------------
+background = gold
+border     = darkkhaki
+text       = black
+
+content
+----------------------------------------
+background = khaki
+border     = darkkhaki
+text       = black
+
+clickable:default
+----------------------------------------
+background = gold
+border     = darkkhaki
+text       = black
+
+clickable:hover
+----------------------------------------
+background = lightyellow
+border     = darkkhaki
+text       = black
+
+clickable:active
+----------------------------------------
+background = khaki
+border     = darkkhaki
+text       = orangered

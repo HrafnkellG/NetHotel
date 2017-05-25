@@ -1,0 +1,816 @@
+/* ===================================================
+
+   S T Y L E S   C O M M O N   T O   A L L   P A G E S
+
+   T H E   C O N T A I N E R
+
+   =================================================== */
+#container {
+    font-family: Trebuchet MS,Helvetica,Arial,sans-serif;
+    font-size: 11px;
+    width: 600px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px; /* Some headroom for the content. */
+    display: block; /* Must do this because of nested DIVs (collpasing borders etc)  see rule #actions. */
+}
+
+
+/* ===================================================
+
+   P R O G R A M   T I T L E   A N D   D A T E
+
+   =================================================== */
+#nhtitle {
+    width: 343px; /* +2px for the borders = 345px */
+    float: left;
+    border: 1px solid black;
+    background: rgb(153,153,153);/*rgb(201,201,201);*/
+    color: white;
+    font-weight: bold;
+    padding-top: 4px;
+    height: 16px; /* padding + height + borders = true height of 22px */
+    border-radius: 4px;
+}
+#nhtitle pre {
+    display: block;
+    text-align: center;
+}
+
+
+/* ===================================================
+
+   D R O P D O W N   M E N U
+
+   =================================================== */
+#menu li {
+    z-index: 100;
+}
+
+#nav {
+    float: left;
+    border: 1px solid rgb(170,170,170);
+    width: 248px;/* 2 for the borders gives 250 */
+    margin-left: 5px;
+    background: rgb(201,201,201);
+    height: 20px;
+    border-radius: 4px;
+}
+
+/* ---------------------------------------------------
+   Float the top-most menu-headers.
+   It is important that they be positioned as relative 
+   since they contain the menu-items as an "ul", if they 
+   are not the menu-items will not appear under them but 
+   at the leftmost edge of the browser window.
+   --------------------------------------------------- */
+#nav li {
+	float: left;
+	position: relative; /* <--- Nota bene! */
+}
+
+/* ---------------------------------------------------
+   But don't float the menu items themselves.
+   --------------------------------------------------- */
+#nav ul li {
+	float: none;
+}
+
+/* ---------------------------------------------------
+   Style the anchors of the top menu.
+   --------------------------------------------------- */
+#nav li a {
+	display: block;
+	padding: 5px;
+	color: black;
+	text-decoration: none;
+	white-space: nowrap; /* <--- Prevent line-splitting */
+	font-weight: bold;
+}
+
+/* ---------------------------------------------------
+   Style the anchors of the drop-downs.
+   --------------------------------------------------- */
+#nav li ul a {
+	display: block;
+	padding: 5px;
+        background: rgb(201,201,201);
+	color: black;
+	text-decoration: none;
+	white-space: nowrap; /* <--- Prevent line-splitting */
+	font-weight: normal;
+}
+
+/* ---------------------------------------------------
+   Position those "ul" elements which hold the drop-down
+   menu items, outside the browser window, thereby making
+   them invisible.
+   --------------------------------------------------- */
+#nav ul {
+	position: absolute;
+	left: -5000px;
+}
+
+/* ---------------------------------------------------
+   Hovering style for the menu headers.
+   --------------------------------------------------- */
+#nav a:hover {
+	color: White;
+}
+
+/* ---------------------------------------------------
+   Hovering style for the drop-down menu items.
+   --------------------------------------------------- */
+#nav ul a:hover {
+	background: rgb(248,248,248);
+	color: rgb(120,202,238);
+}
+
+/* ---------------------------------------------------
+   Behaviour: when any of the "li" elements, which
+   contain the menu headers, are hovered, we position
+   their child "ul" elements at zero, effectively
+   making them visible again.
+   --------------------------------------------------- */
+#nav li:hover ul {
+	left: 0;
+}
+
+/* ===================================================
+
+   P A G E   T I T L E
+
+   A label/title at the top of the page which tells
+   the user the function of the page.
+
+   =================================================== */
+.pagetitle {
+    display: inline-block;
+    width: 100%;
+    background: rgb(238,238,238);
+    height: 15px; /* 22 - 5 padding - 2 borders */
+    padding-top: 5px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+}
+
+/* ===================================================
+
+   A C T I O N S
+
+   =================================================== */
+
+.actions {
+    display: inline-block; /* Because this is nested in #container, see rule for #container. */
+    margin-top: 11px;
+    margin-bottom: 12px;
+    width: 90%;
+}
+
+.actions a {
+    text-decoration: none;
+    color: rgb(51,131,187);
+    border: 1px solid rgb(204,204,204);
+    border-radius: 4px;
+    padding: 4px;
+    margin-right: 2px;
+    background: rgb(238,238,238);
+    font-weight: bold;
+}
+
+.actions a:hover {
+    background: rgb(248,248,248);
+}
+
+/* The CreateDemoData button. */
+a.btncdd {
+    color:red;
+}
+a.btncdd:hover {
+    background: red;
+    color: yellow;
+    border: 1px solid black;
+}
+
+
+/* ===================================================
+
+   T A B L E S
+
+   =================================================== */
+
+/* ---------------------------------------------------
+   These classes control the width of the columns and
+   the horizontal text alignment of column headers/cells.
+   The class names represent what type of information
+   the cells are meant to display.
+   The width in pixels will of course vary depending on
+   the type and size of font used. This must be
+   empirically determined.
+   --------------------------------------------------- */
+
+/* --- Person's name 32 letters */
+.col_name, .col_address, .col_pricelist { 
+    width: 172px; 
+    padding-left: 4px; 
+}
+.cell_name, .cell_address, .cell_pricelist {
+    padding-left: 4px;
+}
+
+/* --- A discount in percentages 10 letter */
+.col_discount {
+    width: 54px;
+    text-align: center;
+}
+.cell_discount {
+    text-align: center;
+}
+
+/* --- Room number 10 letters */
+.col_rno { 
+    width: 54px; 
+    text-align: center; 
+} 
+.cell_rno { 
+    text-align: right; 
+    padding-right: 4px;
+}
+
+/* --- Room size 10 letters */
+.col_rsize { 
+    width: 54px; 
+    text-align: center; 
+}
+.cell_rsize { 
+    text-align: center; 
+}
+
+/* --- On what floor 10 letters */
+.col_floor {
+    width: 54px;
+    text-align: center;
+}
+.cell_floor {
+    text-align: center;
+}
+
+/* --- For how many days the room is free 5 letters */
+.col_noOfDays {
+    width: 27px;
+    text-align: center;
+}
+.cell_noOfDays {
+    text-align: right;
+    padding-right: 4px;
+}
+
+/* --- Room type 10 letters */
+.col_rtype { 
+    width: 54px; 
+    text-align: center; 
+}
+.cell_rtype { 
+    text-align: center; 
+}
+
+/* --- A date 13 letters */
+.col_date {
+    width: 70px;
+    text-align: center; 
+}
+.cell_date {
+    text-align: center;
+    font-size: 10px;
+}
+
+/* --- The state of a room 6 letters*/
+.col_rstatus {
+    width: 32px;
+    text-align: center;
+}
+.cell_rstatus {
+    text-align: center;
+}
+
+/* --- Password 11 letters */
+.col_passw {
+    width: 60px;
+    padding-left: 4px;
+}
+.cell_passw {
+    padding-left: 4px;
+}
+
+/* --- Access level 11 letters */
+.col_access {
+    width: 60px;
+    padding-left: 4px;
+}
+.cell_access {
+    padding-left: 4px;
+}
+
+/* --- Language 11 letters */
+.col_lang {
+    width: 60px;
+    padding-left: 4px;
+}
+.cell_lang {
+    /*padding-left: 4px;*/
+    text-align: center;
+}
+
+/* --- Page style 14 letters */
+.col_style {
+    width: 76px;
+    padding-left: 4px;
+}
+.cell_style {
+    padding-left: 4px;
+}
+
+/* --- A number 13 letters */
+.col_number {
+    width: 72px;
+    text-align: center;
+}
+.cell_number {
+    text-align: right;
+    padding-right: 4px;
+}
+
+/* --- An identifier like a passport number or an SSN 15 letters */
+.col_id {
+    width: 81px;
+    text-align: center;
+}
+.cell_id {
+    text-align: right;
+    padding-right: 4px;
+}
+
+/* --- Nationality 15 letters */
+.col_nat {
+    width: 81px;
+    text-align: center;
+}
+.cell_nat {
+    text-align: right;
+    padding-right: 4px;
+}
+
+/* --- Sex 8 letters */
+.col_sex {
+    width: 44px;
+    text-align: center;
+}
+.cell_sex {
+    text-align: center;
+}
+
+/* --- Reservation number 10 letters */
+.col_resno {
+    width: 54px;
+    text-align: center;
+}
+.cell_resno {
+    text-align: right;
+    padding-right: 4px;
+}
+
+.overdue, .unclean {
+    background: paleturquoise;
+    color: black;
+}
+
+.nhtable {
+    border-collapse: collapse;
+    /*float: left;*/
+}
+
+/* When a table is not embedded in another element. */
+.nhtablestandalone {
+    float: left;
+}
+
+.nhtable caption {
+    background: rgb(238,238,238);
+    height: 15px; /* 22 - 5 padding - 2 borders */
+    padding-top: 5px;
+    text-align: center;
+    margin-bottom: 5px;
+    border: 1px solid black;
+}
+
+.nhtable th {
+    background: rgb(238,238,238);
+    height: 20px; /* 22 - 2 borders */
+    border: 1px solid black;
+}
+
+.nhtable tbody tr {
+    height: 17px;
+    color: white;
+}
+
+.nhtable td {
+    white-space: nowrap; /* Prevent line-splitting */
+}
+
+.row_even {
+    background: #a6a6a6;
+}
+
+.row_odd {
+    background: #999999;
+}
+.row_selected {
+    background: red;
+}
+
+/* This rule prevents a hover effect on rows which have the class rownothover */
+.nhtable tbody tr:not(.rownothover):hover {
+    background: rgb(248,248,248);
+    color: rgb(51,131,187);
+}
+
+/* Where a table is embedded inside another page element and needs command
+   buttons specific to that table, these rules style the action buttons. */
+.tableactions {
+    display: inline-block;
+    margin-top: 11px;
+    margin-bottom: 12px;
+}
+
+.tableactions a {
+    text-decoration: none;
+    color: rgb(51,131,187);
+    border: 1px solid darkgray; /*rgb(204,204,204)*/
+    border-radius: 4px;
+    padding: 4px;
+    margin-right: 2px;
+    background: rgb(238,238,238);
+    font-weight: bold;
+}
+
+.tableactions a:hover {
+    background: rgb(248,248,248);
+}
+
+/* Cells which can be edited. */
+.cell_editable:hover {
+    background: rgb(248,248,248);
+    color: rgb(51,131,187);
+}
+.cell_editable input {
+    width: 70px;
+    height: 10px;
+    padding: 0px;
+    text-align: right;
+}
+/* Closed invoice in a row. */
+.inv_closed {
+    background: tan;
+}
+
+
+/* ===================================================
+
+   D I A L O G S
+
+   =================================================== */
+.form_row {
+    margin-bottom: 3px;
+}
+.form_label {
+    display: inline-block;
+    width: 8em;
+}
+.form_input {
+    display: inline-block;
+    width: 15em;
+}
+.form_info {
+    display: inline-block;
+    width: 4em;
+    text-align: center;
+    border: 1px solid rgb(204,204,204);
+}
+
+/* The select element in drop-down menus. */
+.dropdowninput {
+    width: 12em;
+}
+
+/* Option in a select field */
+.notavailable {
+    background: lightcoral;
+}
+
+/* Inputs targeted by jQuery DatePicker */
+.dpinput {
+    border-radius: 4px;
+    width: 80px;
+    background: floralwhite;
+}
+
+
+/* ===================================================
+
+   P A N E L S
+
+   =================================================== */
+.hcleftpanel, .hcrightpanel {
+    border: 1px solid rgb(204,204,204);
+    background: rgb(238,238,238);
+    width: 291px; /* 296 - padding 5 */
+    height: 150px;
+    padding-left: 5px;
+    padding-top: 5px;
+} 
+
+.hcleftpanel {
+    float: left;
+}
+
+.hcrightpanel {
+    float: right;
+}
+
+.panelreservation {
+    display: inline-block; /* Because this is nested in #container, see rule for #container. */
+    /*margin-top: 11px;*/
+    border: 1px solid ivory;
+    background: beige;
+    width: 291px; /* 296 - padding 5 */
+    height: 177px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.paneltitle {
+    border: 1px solid black;
+    padding: 4px;
+    background: rgb(201,201,201);
+    text-align: center;
+    width: 276px;
+    margin-bottom: 6px;
+}
+/* Restrict the width to 4 characters */
+.panelnum4chars {
+    width: 30px;
+}
+.panelnum4chars input {
+    width: 30px;
+}
+/* Panel enclosing a table of rooms on the reservation page. */
+.panrestab {
+    float: right;
+    border: 1px solid rgb(204,204,204);
+    padding: 5px;
+    margin-right: 60px;
+}
+/* Panel enclosing a table which is positioned under a checkbox/period */
+.pantable {
+    float: left;
+    border: 1px solid rgb(204,204,204);
+    padding: 5px;
+}
+
+/* ===================================================
+
+   P E R I O D   S T A N D A L O N E
+
+   =================================================== */
+.period {
+    background: rgb(201,201,201);
+    float: left;
+    margin-top: 4px;
+    margin-bottom: 6px;
+    border: 1px solid rgb(170,170,170);
+    border-radius: 4px;
+    padding-top: 6px;
+    padding-left: 4px;
+    padding-right: 8px;
+    height: 28px; /* 34 - padding top 6px */
+}
+/* Keep the table on the ResList page from jumping up when it is empty */
+.perreslist {
+    margin-right: 80px;
+}
+.period input {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.singleCheckbox {
+    float: left;
+    width: 20%;
+    margin-top: 10px;
+}
+
+/* ===================================================
+
+   I N V O I C E
+
+   =================================================== */
+.invtitle {
+    border: 1px solid black;
+    border-radius: 4px;
+    float: left;
+    width: 598px;
+    text-align: center;
+    height: 16px;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+.invno {
+    border: 1px solid black;
+    background: rgb(238,238,238);
+    float: left;
+    width: 290px;
+    text-align: left;
+    height: 16px;
+    margin-top: 5px;
+    padding-top: 5px;  /* <-- ADDS to the height! */
+    padding-left: 5px; /* <-- ADDS to the width!  */
+}
+.invdate {
+    border: 1px solid black;
+    background: rgb(238,238,238);
+    float: left;
+    width: 290px;
+    text-align: left;
+    height: 16px;
+    margin-top: 5px;
+    padding-top: 5px;  /* <-- ADDS to the height! */
+    padding-left: 5px; /* <-- ADDS to the width!  */
+    margin-left: 5px;
+}
+.invbuyerinfo {
+    border: 1px solid black;
+    background: rgb(238,238,238);
+    float: left;
+    width: 290px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+.invsellerinfo {
+    border: 1px solid black;
+    background: rgb(238,238,238);
+    float: right;
+    width: 290px;
+    margin-top: 5px;
+    margin-right: 1px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+.invstitle {
+    background: rgb(153,153,153);
+    width: 280px;
+    height: 16px;
+    padding-top: 5px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    color: white;
+}
+.invbtitle {
+    background: rgb(153,153,153);
+    width: 280px;
+    height: 16px;
+    padding-top: 5px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    color: white;
+}
+.inv_footer {
+    height: 16px;
+}
+.invf_vatnum {
+    background: aliceblue;
+}
+.invf_sumnum {
+    background: palegreen;
+}
+
+/* ===================================================
+
+   S T Y L E S   F O R   D I V S   
+   M A R K E D   E X T R A
+
+   =================================================== */
+div.extra_main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/Titian_main.jpg");
+    z-index: -1;
+}
+div.extra_checkin {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/Assumption_checkin.jpg");
+    z-index: -1;
+}
+div.extra_checkout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/Christ_checkout.jpg");
+    z-index: -1;
+}
+div.extra_customers {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/ManInRedCap_customers.jpg");
+    z-index: -1;
+}
+div.extra_config {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/QuiltedSleeve_config.jpg");
+    z-index: -1;
+}
+div.extra_invlist {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/LaSchiavona_invlist.jpg");
+    z-index: -1;
+}
+div.extra_pricelist {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/St.Mark_pricelist.jpg");
+    z-index: -1;
+}
+div.extra_reservation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/Bacchanal_reservation.jpg");
+    z-index: -1;
+}
+div.extra_resedit {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/WorshipOfVenus_resedit.jpg");
+    z-index: -1;
+}
+div.extra_reslist {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/Venus_reslist.jpg");
+    z-index: -1;
+}
+div.extra_rooms {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/Violante_rooms.jpg");
+    z-index: -1;
+}
+div.extra_users {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("pics/Lucretia_users.jpg");
+    z-index: -1;
+}

@@ -1,0 +1,10 @@
+Class.forName("org.hsqldb.jdbcDriver");
+
+connection = DriverManager.getConnection(
+    "jdbc:hsqldb:" + db_file_name_prefix, // filenames
+    "sa",                                 // username
+    "");                                  // password
+
+connection.createStatement().executeUpdate(sqlStatement);
+
+resultSet = connection.createStatment().executeQuery(sqlStatement);
