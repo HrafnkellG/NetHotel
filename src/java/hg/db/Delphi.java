@@ -3472,5 +3472,40 @@ public class Delphi
         
         return sqlExecuteInserUpdateDelete(query);
         }
+
+    /* --------------------------------------------------------------------- */
+    /**
+     * Get the currently highest id used by a customer.
+     */
+    /* --------------------------------------------------------------------- */
+    public int getCustomerMaxID()
+        {
+        int result = -1;
+        String query = "select max(id) as maxid from customer;";
+        
+        Statement stmt = null;
+        try 
+            {
+            stmt = _hsqldbConnection.createStatement();
+            ResultSet rset = stmt.executeQuery(query);
+            rset.next();
+            result = rset.getInt("maxid");
+            } 
+        catch (Exception ex) 
+            {
+            AppLog.Instance().Error("getCustomerMaxID() " + ex.getMessage());
+            } 
+        finally 
+            {
+            try 
+                {
+                if (stmt != null) { stmt.close(); }
+                } 
+            catch (Exception ex2) 
+                {}
+            }
+        
+        return result;
+        }
     
     }//END-OF-CLASS Delphi

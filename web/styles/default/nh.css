@@ -5,6 +5,10 @@
    T H E   C O N T A I N E R
 
    =================================================== */
+body {
+    background-image: url("pics/Waterfall_03.jpg");
+    background-repeat: repeat;
+}
 #container {
     font-family: Trebuchet MS,Helvetica,Arial,sans-serif;
     font-size: 11px;
@@ -26,7 +30,7 @@
     width: 343px; /* +2px for the borders = 345px */
     float: left;
     border: 1px solid black;
-    background: rgb(153,153,153);/*rgb(201,201,201);*/
+    background: rgb(159,207,255);
     color: white;
     font-weight: bold;
     padding-top: 4px;
@@ -53,7 +57,7 @@
     border: 1px solid rgb(170,170,170);
     width: 248px;/* 2 for the borders gives 250 */
     margin-left: 5px;
-    background: rgb(201,201,201);
+    background: rgb(159,207,255);
     height: 20px;
     border-radius: 4px;
 }
@@ -95,7 +99,7 @@
 #nav li ul a {
 	display: block;
 	padding: 5px;
-        background: rgb(201,201,201);
+    background: rgb(159,207,255);
 	color: black;
 	text-decoration: none;
 	white-space: nowrap; /* <--- Prevent line-splitting */
@@ -123,8 +127,8 @@
    Hovering style for the drop-down menu items.
    --------------------------------------------------- */
 #nav ul a:hover {
-	background: rgb(248,248,248);
-	color: rgb(120,202,238);
+	background: rgb(223,239,255);
+	color: black;
 }
 
 /* ---------------------------------------------------
@@ -148,7 +152,7 @@
 .pagetitle {
     display: inline-block;
     width: 100%;
-    background: rgb(238,238,238);
+    background: rgb(254,238,189);
     height: 15px; /* 22 - 5 padding - 2 borders */
     padding-top: 5px;
     text-align: center;
@@ -172,17 +176,17 @@
 
 .actions a {
     text-decoration: none;
-    color: rgb(51,131,187);
-    border: 1px solid rgb(204,204,204);
+    color: black;
+    border: 1px solid rgb(209,148,5);
     border-radius: 4px;
     padding: 4px;
     margin-right: 2px;
-    background: rgb(238,238,238);
+    background: rgb(254,213,76);
     font-weight: bold;
 }
 
 .actions a:hover {
-    background: rgb(248,248,248);
+    background: rgb(255,232,143);
 }
 
 /* The CreateDemoData button. */
@@ -383,8 +387,8 @@ a.btncdd:hover {
 }
 
 .overdue, .unclean {
-    background: paleturquoise;
-    color: black;
+    background: rgb(159,207,255);
+    color: yellow;
 }
 
 .nhtable {
@@ -398,7 +402,7 @@ a.btncdd:hover {
 }
 
 .nhtable caption {
-    background: rgb(238,238,238);
+    background: rgb(159,207,255);
     height: 15px; /* 22 - 5 padding - 2 borders */
     padding-top: 5px;
     text-align: center;
@@ -407,14 +411,14 @@ a.btncdd:hover {
 }
 
 .nhtable th {
-    background: rgb(238,238,238);
+    background: rgb(159,207,255);
     height: 20px; /* 22 - 2 borders */
     border: 1px solid black;
 }
 
 .nhtable tbody tr {
     height: 17px;
-    color: white;
+    color: black;
 }
 
 .nhtable td {
@@ -422,11 +426,11 @@ a.btncdd:hover {
 }
 
 .row_even {
-    background: #a6a6a6;
+    background: rgb(223,239,255);
 }
 
 .row_odd {
-    background: #999999;
+    background: rgb(198,226,255);
 }
 .row_selected {
     background: red;
@@ -524,11 +528,12 @@ a.btncdd:hover {
 
    =================================================== */
 .hcleftpanel, .hcrightpanel {
-    border: 1px solid rgb(204,204,204);
+    border: 1px solid rgb(209,148,5);
     width: 291px; /* 296 - padding 5 */
     height: 150px;
     padding-left: 5px;
     padding-top: 5px;
+    background-color: rgb(254,238,189);
 } 
 
 .hcleftpanel {
@@ -542,11 +547,12 @@ a.btncdd:hover {
 .panelreservation {
     display: inline-block; /* Because this is nested in #container, see rule for #container. */
     /*margin-top: 11px;*/
-    border: 1px solid rgb(204,204,204);
+    border: 1px solid black;
     width: 291px; /* 296 - padding 5 */
     height: 177px;
     padding-left: 5px;
     padding-top: 5px;
+    background: rgb(254,238,189);
 }
 
 .paneltitle {
@@ -567,15 +573,17 @@ a.btncdd:hover {
 /* Panel enclosing a table of rooms on the reservation page. */
 .panrestab {
     float: right;
-    border: 1px solid rgb(204,204,204);
+    border: 1px solid black;
     padding: 5px;
     margin-right: 60px;
+    background: rgb(254,238,189);
 }
 /* Panel enclosing a table which is positioned under a checkbox/period */
 .pantable {
     float: left;
     border: 1px solid rgb(204,204,204);
     padding: 5px;
+    background: rgb(254,238,189);
 }
 
 /* ===================================================
@@ -593,6 +601,7 @@ a.btncdd:hover {
     padding-left: 4px;
     padding-right: 8px;
     height: 28px; /* 34 - padding top 6px */
+    background: rgb(254,238,189);
 }
 /* Keep the table on the ResList page from jumping up when it is empty */
 .perreslist {
@@ -614,6 +623,14 @@ a.btncdd:hover {
    I N V O I C E
 
    =================================================== */
+/* The div surrounding the table. */
+.invitems {
+    border: 1px solid black;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    background: rgb(254,238,189);
+}
 .invtitle {
     border: 1px solid black;
     border-radius: 4px;
@@ -633,6 +650,7 @@ a.btncdd:hover {
     margin-top: 5px;
     padding-top: 5px;  /* <-- ADDS to the height! */
     padding-left: 5px; /* <-- ADDS to the width!  */
+    background: rgb(254,238,189);
 }
 .invdate {
     border: 1px solid black;
@@ -644,6 +662,7 @@ a.btncdd:hover {
     padding-top: 5px;  /* <-- ADDS to the height! */
     padding-left: 5px; /* <-- ADDS to the width!  */
     margin-left: 5px;
+    background: rgb(254,238,189);
 }
 .invbuyerinfo {
     border: 1px solid black;
@@ -653,6 +672,7 @@ a.btncdd:hover {
     padding-top: 5px;
     padding-left: 5px;
     padding-bottom: 5px;
+    background: rgb(254,238,189);
 }
 .invsellerinfo {
     border: 1px solid black;
@@ -663,6 +683,7 @@ a.btncdd:hover {
     padding-top: 5px;
     padding-left: 5px;
     padding-bottom: 5px;
+    background: rgb(254,238,189);
 }
 .invstitle {
     background: rgb(153,153,153);

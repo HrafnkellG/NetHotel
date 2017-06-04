@@ -29,6 +29,10 @@ public class CreateDemoData extends HttpServlet
     private int _reservationID;
     private int _invoiceID = 0;
     private String _resDateCreated;
+    // In this demo-data there are 3 customers (for now).
+    // This holds the id for the first record, to use the other
+    // IDs we will do this: _lowCustID+1 / _lowCustID+2
+    private int _lowCustID;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,16 +53,28 @@ public class CreateDemoData extends HttpServlet
         try
             {
             Delphi db = Delphi.Inst();
-            db.sqlExecuteInserUpdateDelete(_sqlWipeAndCreateDB);
-            db.sqlExecuteInserUpdateDelete(Occupied101());
-            db.sqlExecuteInserUpdateDelete(Res1045());
-            db.sqlExecuteInserUpdateDelete(Res106());
-            db.sqlExecuteInserUpdateDelete(Res107());
-            db.sqlExecuteInserUpdateDelete(Res202345());
-            db.sqlExecuteInserUpdateDelete(ResArrive1056());
-            db.sqlExecuteInserUpdateDelete(ResArrive108());
-            db.sqlExecuteInserUpdateDelete(ResArrive201());
-            db.sqlExecuteInserUpdateDelete(ResArrive20234());
+            _invoiceID = db.getInvMaxID();
+            _invoiceID++;
+            _lowCustID = db.getCustomerMaxID();
+            _lowCustID++;
+            
+            if (!db.sqlExecuteInserUpdateDelete(_sqlWipeDB)) { throw new Exception("Failed to clear tables."); }
+            if (!db.sqlExecuteInserUpdateDelete(_sqlCreateRoomsDB)) { throw new Exception("Failed to create rooms."); }
+            if (!db.sqlExecuteInserUpdateDelete(_sqlConfigDB)) { throw new Exception("Failed to config hotel."); }
+            if (!db.sqlExecuteInserUpdateDelete(_sqlPricelist1)) { throw new Exception("Failed to create pricelist 1"); }
+            if (!db.sqlExecuteInserUpdateDelete(_sqlPricelist2)) { throw new Exception("Failed to create pricelist 2"); }
+            if (!db.sqlExecuteInserUpdateDelete(_sqlCustomerCash)) { throw new Exception("Failed to create customer Cash"); }
+            if (!db.sqlExecuteInserUpdateDelete(_sqlCustomerArtisanal)) { throw new Exception("Failed to create customer Artisanal"); }
+            if (!db.sqlExecuteInserUpdateDelete(_sqlCustomerMountains)) { throw new Exception("Failed to create customer Mountains"); }
+            if (!db.sqlExecuteInserUpdateDelete(Occupied101())) { throw new Exception("Error creating res/inv no. 101"); }
+            if (!db.sqlExecuteInserUpdateDelete(Res1045())) { throw new Exception("Error creating res/inv no. 1045"); }
+            if (!db.sqlExecuteInserUpdateDelete(Res106())) { throw new Exception("Error creating res/inv no. 106"); }
+            if (!db.sqlExecuteInserUpdateDelete(Res107())) { throw new Exception("Error creating res/inv no. 107"); }
+            if (!db.sqlExecuteInserUpdateDelete(Res202345())) { throw new Exception("Error creating res/inv no. 202345"); }
+            if (!db.sqlExecuteInserUpdateDelete(ResArrive1056())) { throw new Exception("Error creating res/inv no. 1056"); }
+            if (!db.sqlExecuteInserUpdateDelete(ResArrive108())) { throw new Exception("Error creating res/inv no. 108"); }
+            if (!db.sqlExecuteInserUpdateDelete(ResArrive201())) { throw new Exception("Error creating res/inv no. 201"); }
+            if (!db.sqlExecuteInserUpdateDelete(ResArrive20234())) { throw new Exception("Error creating res/inv no. 20234"); }
             
             // Must recreate the objects stored in the session object.
             DBR res = db.UserGet("all", "open");
@@ -76,7 +92,7 @@ public class CreateDemoData extends HttpServlet
             }
         catch (Exception ex) 
             {
-            out.print("Demo creation failed.");
+            out.print(ex.getMessage());
             }
         finally
             {
@@ -128,7 +144,8 @@ public class CreateDemoData extends HttpServlet
 
     // <editor-fold defaultstate="collapsed" desc="Wipe and create">
     // Copied from DB_CREATE.sql
-    private String _sqlWipeAndCreateDB = 
+    
+    private String _sqlWipeDB = 
         "DELETE FROM customer;" +
         "DELETE FROM hotel;" +
         "DELETE FROM invitems;" +
@@ -138,8 +155,9 @@ public class CreateDemoData extends HttpServlet
         "DELETE FROM res;" +
         "DELETE FROM resg;" +
         "DELETE FROM room;" +
-        "DELETE FROM user WHERE user.id <> 0;" +
-        "" +
+        "DELETE FROM user WHERE user.id <> 0;";
+    
+    private String _sqlCreateRoomsDB = 
         "INSERT INTO Room (roomno, size, floor, type, occupied, clean) VALUES ('101', 1, 1, 'MIN', 'false', 'true');" +
         "INSERT INTO Room (roomno, size, floor, type, occupied, clean) VALUES ('102', 1, 1, 'MIN', 'false', 'true');" +
         "INSERT INTO Room (roomno, size, floor, type, occupied, clean) VALUES ('103', 1, 1, 'MIN', 'false', 'true');" +
@@ -152,8 +170,8 @@ public class CreateDemoData extends HttpServlet
         "INSERT INTO Room (roomno, size, floor, type, occupied, clean) VALUES ('202', 1, 2, 'MID', 'false', 'true');" +
         "INSERT INTO Room (roomno, size, floor, type, occupied, clean) VALUES ('203', 2, 2, 'MAX', 'false', 'true');" +
         "INSERT INTO Room (roomno, size, floor, type, occupied, clean) VALUES ('204', 2, 2, 'MID', 'false', 'true');" +
-        "INSERT INTO Room (roomno, size, floor, type, occupied, clean) VALUES ('205', 2, 2, 'MAX', 'false', 'true');" +
-        "" +
+        "INSERT INTO Room (roomno, size, floor, type, occupied, clean) VALUES ('205', 2, 2, 'MAX', 'false', 'true');";
+    private String _sqlConfigDB =
         "INSERT INTO HOTEL (" +
         "  name," +
         "  addr1," +
@@ -173,8 +191,8 @@ public class CreateDemoData extends HttpServlet
         "  20," +
         "  'GB'," +
         "  'en_GB_'," +
-        "  'false');" +
-        "" +
+        "  'false');";
+    private String _sqlPricelist1 =
         "INSERT INTO PRICE (" +
         " id, usercreated, whencreated,  name,      periodstart,  periodend) " +
         "VALUES (" +
@@ -192,8 +210,8 @@ public class CreateDemoData extends HttpServlet
         "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, extracot) VALUES (1, '202', 'MIN', 1, 2000, 1000);" +
         "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, guest2, extracot) VALUES (1, '203', 'MIN', 2, 3000, 4000, 1000);" +
         "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, guest2, extracot) VALUES (1, '204', 'MIN', 2, 3000, 4000, 1000);" +
-        "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, guest2, extracot) VALUES (1, '205', 'MIN', 2, 3000, 4000, 1000);" +
-        "" +
+        "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, guest2, extracot) VALUES (1, '205', 'MIN', 2, 3000, 4000, 1000);";
+    private String _sqlPricelist2 =
         "INSERT INTO PRICE (" +
         " id, usercreated, whencreated,  name,        periodstart,  periodend) " +
         "VALUES (" +
@@ -211,16 +229,18 @@ public class CreateDemoData extends HttpServlet
         "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, extracot) VALUES (2, '202', 'MIN', 1, 1600, 1000);" +
         "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, guest2, extracot) VALUES (2, '203', 'MIN', 2, 2400, 3200, 1000);" +
         "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, guest2, extracot) VALUES (2, '204', 'MIN', 2, 2400, 3200, 1000);" +
-        "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, guest2, extracot) VALUES (2, '205', 'MIN', 2, 2400, 3200, 1000);" +
-        "" +
+        "INSERT INTO PITEMS (priceid, roomno, roomtype, roomsize, guest1, guest2, extracot) VALUES (2, '205', 'MIN', 2, 2400, 3200, 1000);";
+    private String _sqlCustomerCash =
         "INSERT INTO CUSTOMER (" +
         " firstname,              address1,                          address2,                   pricelist) " +
         "VALUES (" +
-        " 'Cash',                 '',                                '',                         1);" +
+        " 'Cash',                 '',                                '',                         1);";
+    private String _sqlCustomerArtisanal =
         "INSERT INTO CUSTOMER (" +
         " firstname,              address1,                          address2,                   pricelist) " +
         "VALUES (" +
-        " 'Artisanal Tours Inc.', 'Alperton House Bridgewater Road', 'Alperton Wembley HA0 1EH', 2);" +
+        " 'Artisanal Tours Inc.', 'Alperton House Bridgewater Road', 'Alperton Wembley HA0 1EH', 2);";
+    private String _sqlCustomerMountains =
         "INSERT INTO CUSTOMER (" +
         "firstname,           address1,           postalcode, city,        country,   pricelist) " +
         "VALUES (" +
@@ -241,7 +261,7 @@ public class CreateDemoData extends HttpServlet
             + _reservationID + ","
             + "'" + _resDateCreated + "',"
             + "'all',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "1,"
             + "1,"
             + "'" + yesterday + "',"
@@ -264,7 +284,7 @@ public class CreateDemoData extends HttpServlet
             + "("
             + "'all',"
             + "'" + yesterday + "',"
-            + "1,"
+            + (_lowCustID + 1)+ ","
             + "false"
             + ");"
             + "insert into INVITEMS (invid, roomno, roomsize, arrive, depart, priceprnight, total) values "
@@ -306,7 +326,7 @@ public class CreateDemoData extends HttpServlet
             + _reservationID + ","
             + "'" + _resDateCreated + "',"
             + "'all',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "2,"
             + "2,"
             + "'" + yesterday + "',"
@@ -341,7 +361,7 @@ public class CreateDemoData extends HttpServlet
             + "("
             + "'all',"
             + "'" + yesterday + "',"
-            + "2,"
+            + (_lowCustID + 2)+ ","
             + "false"
             + ");"
             + "insert into INVITEMS (invid, roomno, roomsize, arrive, depart, priceprnight, total) values "
@@ -384,7 +404,7 @@ public class CreateDemoData extends HttpServlet
             + _reservationID + ","
             + "'" + _resDateCreated + "',"
             + "'all',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "1,"
             + "1,"
             + "'" + twodaysago + "',"
@@ -407,7 +427,7 @@ public class CreateDemoData extends HttpServlet
             + "("
             + "'all',"
             + "'" + twodaysago + "',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "false"
             + ");"
             + "insert into INVITEMS (invid, roomno, roomsize, arrive, depart, priceprnight, total) values "
@@ -440,7 +460,7 @@ public class CreateDemoData extends HttpServlet
             + _reservationID + ","
             + "'" + _resDateCreated + "',"
             + "'all',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "1,"
             + "1,"
             + "'" + threedaysago + "',"
@@ -463,7 +483,7 @@ public class CreateDemoData extends HttpServlet
             + "("
             + "'all',"
             + "'" + threedaysago + "',"
-            + "1,"
+            + (_lowCustID + 1)+ ","
             + "false"
             + ");"
             + "insert into INVITEMS (invid, roomno, roomsize, arrive, depart, priceprnight, total) values "
@@ -496,7 +516,7 @@ public class CreateDemoData extends HttpServlet
             + _reservationID + ","
             + "'" + _resDateCreated + "',"
             + "'all',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "4,"
             + "5,"
             + "'" + yesterday + "',"
@@ -567,7 +587,7 @@ public class CreateDemoData extends HttpServlet
             + "("
             + "'all',"
             + "'" + yesterday + "',"
-            + "1,"
+            + (_lowCustID + 1)+ ","
             + "false"
             + ");"
             + "insert into INVITEMS (invid, roomno, roomsize, arrive, depart, priceprnight, total) values "
@@ -630,7 +650,7 @@ public class CreateDemoData extends HttpServlet
             + _reservationID + ","
             + "'" + _resDateCreated + "',"
             + "'all',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "2,"
             + "2,"
             + "'" + today + "',"
@@ -666,7 +686,7 @@ public class CreateDemoData extends HttpServlet
             + "("
             + "'all',"
             + "'" + today + "',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "false"
             + ");"
             + "insert into INVITEMS (invid, roomno, roomsize, arrive, depart, priceprnight, total) values "
@@ -709,7 +729,7 @@ public class CreateDemoData extends HttpServlet
             + _reservationID + ","
             + "'" + _resDateCreated + "',"
             + "'all',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "1,"
             + "1,"
             + "'" + yesterday + "',"
@@ -733,7 +753,7 @@ public class CreateDemoData extends HttpServlet
             + "("
             + "'all',"
             + "'" + yesterday + "',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "false"
             + ");"
             + "insert into INVITEMS (invid, roomno, roomsize, arrive, depart, priceprnight, total) values "
@@ -765,7 +785,7 @@ public class CreateDemoData extends HttpServlet
             + _reservationID + ","
             + "'" + _resDateCreated + "',"
             + "'all',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "1,"
             + "1,"
             + "'" + today + "',"
@@ -789,7 +809,7 @@ public class CreateDemoData extends HttpServlet
             + "("
             + "'all',"
             + "'" + today + "',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "false"
             + ");"
             + "insert into INVITEMS (invid, roomno, roomsize, arrive, depart, priceprnight, total) values "
@@ -821,7 +841,7 @@ public class CreateDemoData extends HttpServlet
             + _reservationID + ","
             + "'" + _resDateCreated + "',"
             + "'all',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "3,"
             + "5,"
             + "'" + today + "',"
@@ -893,7 +913,7 @@ public class CreateDemoData extends HttpServlet
             + "("
             + "'all',"
             + "'" + today + "',"
-            + "0,"
+            + (_lowCustID)+ ","
             + "false"
             + ");"
             + "insert into INVITEMS (invid, roomno, roomsize, arrive, depart, priceprnight, total) values "
