@@ -216,33 +216,6 @@ a.btncdd:hover {
    empirically determined.
    --------------------------------------------------- */
 
-/* --- The graph table. */
-.col_grroomno, .col_grweekday {
-    width: 71px;
-    text-align: center;
-    font-weight: bold;
-}
-.cell_grroomno {
-    border: 1px solid black;
-    text-align: center;
-}
-.cell_grres {
-    padding-left: 4px;
-    border: 1px solid black;
-}
-.cell_groccupied {
-    background-color: rgb(254,213,76);
-}
-.cell_grreservation {
-    background-color: lightgreen;
-}
-.cell_grselected {
-    background-color: red;
-}
-#dpgraph {
-    margin-bottom: 4px;
-}
-
 /* --- Person's name 32 letters */
 .col_name, .col_address, .col_pricelist { 
     width: 172px; 

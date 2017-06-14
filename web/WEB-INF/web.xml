@@ -264,6 +264,10 @@
         <servlet-name>InvClose</servlet-name>
         <servlet-class>hg.ajax.inv.InvClose</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TabGraph</servlet-name>
+        <servlet-class>hg.ajax.tabs.TabGraph</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -527,6 +531,10 @@
     <servlet-mapping>
         <servlet-name>InvClose</servlet-name>
         <url-pattern>/InvClose</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TabGraph</servlet-name>
+        <url-pattern>/TabGraph</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

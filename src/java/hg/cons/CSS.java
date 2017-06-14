@@ -39,22 +39,24 @@ public interface CSS
     String CROW_NOTHOVER = "rownothover";
     String COVERDUE      = "overdue";
     
-    String CCOL_NAME     = "col_name";
-    String CCOL_PASSW    = "col_passw";
-    String CCOL_ACCESS   = "col_access";
-    String CCOL_LANG     = "col_lang";
-    String CCOL_STYLE    = "col_style";
-    String CCOL_RNO      = "col_rno";
-    String CCOL_RSIZE    = "col_rsize";
-    String CCOL_RTYPE    = "col_rtype";
-    String CCOL_FLOOR    = "col_floor";
-    String CCOL_NUMBER   = "col_number";
-    String CCOL_ID       = "col_id";
-    String CCOL_NAT      = "col_nat";
-    String CCOL_SEX      = "col_sex";
-    String CCOL_DATE     = "col_date";
-    String CCOL_RESNO    = "col_resno";
-    String CCOL_CHECKBOX = "col_checkbox";
+    String CCOL_NAME      = "col_name";
+    String CCOL_PASSW     = "col_passw";
+    String CCOL_ACCESS    = "col_access";
+    String CCOL_LANG      = "col_lang";
+    String CCOL_STYLE     = "col_style";
+    String CCOL_RNO       = "col_rno";
+    String CCOL_RSIZE     = "col_rsize";
+    String CCOL_RTYPE     = "col_rtype";
+    String CCOL_FLOOR     = "col_floor";
+    String CCOL_NUMBER    = "col_number";
+    String CCOL_ID        = "col_id";
+    String CCOL_NAT       = "col_nat";
+    String CCOL_SEX       = "col_sex";
+    String CCOL_DATE      = "col_date";
+    String CCOL_RESNO     = "col_resno";
+    String CCOL_CHECKBOX  = "col_checkbox";
+    String CCOL_GRROOMNO  = "col_grroomno";
+    String CCOL_GRWEEKDAY = "col_grweekday";
     
     String CCELL_NAME     = "cell_name";
     String CCELL_PASSW    = "cell_passw";
@@ -73,4 +75,6 @@ public interface CSS
     String CCELL_DATE     = "cell_date";
     String CCELL_RESNO    = "cell_resno";
     String CCELL_CHECKBOX = "cell_checkbox";
+    String CCELL_GRROOMNO = "cell_grroomno";
+    String CCELL_GRRES    = "cell_grres";
     }

@@ -12,6 +12,7 @@ function InitMain() {
     try {
         UPInit();
         jQuery('#jqtabs').tabs({ activate: trackTabActivation });
+        jQuery('#jqtabs').tabs({ load: trackTabLoad });
         
         // This variable is defined on the server.
         jQuery('#jqtabs').tabs({ active: lastSelectedTab });
@@ -21,6 +22,22 @@ function InitMain() {
     }
 }
 
+
+/* ----------------------------------------------------------------------
+ * 
+ * When a tab has finished loading we check whether it is the graph tab,
+ * if so we initialize the datepicker.
+ *
+ * ---------------------------------------------------------------------- */
+function trackTabLoad(event, ui) {
+    var newTI = $( "#jqtabs" ).tabs( "option", "active" );
+    if (newTI === 0) {
+        var the_date = new Date(2017,5,13);
+        $('#dpgraph').datepicker($.datepicker.regional[""]);
+        $('#dpgraph').datepicker("option", "dateFormat", "yy-mm-dd");
+        $('#dpgraph').datepicker('setDate', the_date);
+    }
+}
 
 
 /* ----------------------------------------------------------------------

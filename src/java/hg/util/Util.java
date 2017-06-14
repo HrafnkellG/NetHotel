@@ -31,6 +31,24 @@ public class Util
     private static NumberFormat     _nfdDot   = NumberFormat.getInstance(Locale.US);
     private static NumberFormat     _nfdComma = NumberFormat.getInstance(Locale.FRANCE);
     private static SimpleDateFormat _DtoISO   = new SimpleDateFormat("yyyy-MM-dd");
+    private static SimpleDateFormat _DtoISOpacked = new SimpleDateFormat("yyyyMMdd");
+    
+    /* --------------------------------------------------------------------- */
+    /**
+     * Add days to a date.
+     * 
+     * @param target The date to alter.
+     * @param noDays How many days to add (or subtract if negative).
+     * @return A new instance of Date.
+     */
+    /* --------------------------------------------------------------------- */
+    static public Date DateAddDays(Date target, int noDays) 
+        {
+        GregorianCalendar gc = DateToGregorian(target);
+        gc.add(GregorianCalendar.DAY_OF_MONTH, noDays);
+        return gc.getTime();
+        }
+    
     
     /*  -------------------------------------------------------------------- */
     /** 
@@ -350,6 +368,16 @@ public class Util
     public static String DateToIso(Date dsrc) 
         {
         return _DtoISO.format(dsrc);
+        }
+    
+    /* --------------------------------------------------------------------- */
+    /**
+     * Convert a Date into packed ISO, i.e. no hyphens.
+     */
+    /* --------------------------------------------------------------------- */
+    public static String DateToIsoPacked(Date dsrc) 
+        {
+        return _DtoISOpacked.format(dsrc);
         }
 
     public static int DifferenceInDays(Date d1, Date d2)
