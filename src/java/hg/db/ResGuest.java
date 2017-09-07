@@ -276,9 +276,19 @@ public class ResGuest
         row.setCell(4, cssCellDeparts, Util.DateToIso(_dep));
         }
 
+    public String getRoomNo() 
+        {
+        return _roomno;
+        }
+    
     public Date getArriveDate()
         {
         return _arr;
+        }
+    
+    public Date getDepartDate() 
+        {
+        return _dep;
         }
 
     }

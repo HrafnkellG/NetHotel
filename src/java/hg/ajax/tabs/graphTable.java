@@ -4,6 +4,8 @@ import hg.cons.CSS;
 import hg.cons.Loc;
 import hg.db.DBR;
 import hg.db.Delphi;
+import hg.db.Res;
+import hg.db.ResGuest;
 import hg.db.Room;
 import hg.db.User;
 import hg.html5.Table;
@@ -33,7 +35,8 @@ class graphTable
         ArrayList<Room> rooms = (ArrayList)resultRooms.Result();
         
         DBR result = db.Reservations(startDate, endDate);
-        ArrayList resv = (ArrayList)result.Result();
+        if (! result.OK()) { return null; }
+        ArrayList<Res> resList = (ArrayList)result.Result();
         
         // Create the column headers.
         String[] colh = new String[8];
@@ -82,9 +85,48 @@ class graphTable
             for (int i=1; i<=7; i++) 
                 {
                 String cellID = r.getRoomNo() + Util.DateToIsoPacked(currentDate);
-                tr.setCell(i, CSS.CCELL_GRRES, cellID);
+                tr.setCellID(i, cellID);
+                
+                ResGuest foundGuestForRoomAndDay = null;
+                for (Res resv : resList) 
+                    {
+                    ArrayList<ResGuest> guestList = resv.getGuestList();
+                    for (ResGuest g : guestList) 
+                        {
+                        String rn = g.getRoomNo();
+                        if (!rn.equals(r.getRoomNo())) 
+                            { continue; }
+                        
+                        // This guest is booked for this room during the week,
+                        // check whether his reservation falls on this day.
+                        Date garrive = g.getArriveDate();
+                        Date gdepart = g.getDepartDate();
+                        if (garrive.getTime() <= currentDate.getTime() &&
+                            gdepart.getTime() >  currentDate.getTime()) 
+                            {
+                            // This guest is booked for this room on this day,
+                            // our search is over.
+                            foundGuestForRoomAndDay = g;
+                            break;
+                            }
+                        }
+                    if (foundGuestForRoomAndDay != null) 
+                        {
+                        break;
+                        }
+                    }//END-OF for (Res resv : resList)
+                
+                if (foundGuestForRoomAndDay != null) 
+                    {
+                    tr.setCell(i, CSS.CCELL_GRRES + " " + CSS.CCELL_GRRESERVATION, null);
+                    }
+                else 
+                    {
+                    tr.setCell(i, CSS.CCELL_GRRES, null);
+                    }
                 currentDate = Util.DateAddDays(currentDate, 1);
-                }
+                }//END-OF for (int i=1; i<=7; i++)
+            
             }//END-OF for (Room r : rooms) 
         
         return t;

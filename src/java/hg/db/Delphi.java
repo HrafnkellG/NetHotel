@@ -1907,6 +1907,8 @@ public class Delphi
                 resg._gender    = rSet.getInt("gender");
                 resg._checkedin = rSet.getBoolean("checkedin");
                 resg._roomno    = rSet.getString("roomno");
+                resg._arr       = rSet.getDate("arr");
+                resg._dep       = rSet.getDate("dep");
                 currentRes.addGuest(resg);
                 }
             // Store the last read reservation

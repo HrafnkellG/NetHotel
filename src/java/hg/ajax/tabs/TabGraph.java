@@ -1,5 +1,6 @@
 package hg.ajax.tabs;
 
+import hg.cons.Loc;
 import hg.cons.Sess;
 import hg.db.Delphi;
 import hg.db.Hotel;
@@ -51,7 +52,7 @@ public class TabGraph extends HttpServlet
                 }
             Delphi db = Delphi.Inst();
             
-            JQDatePicker jqdp = new JQDatePicker("Dagsetning", "dpinput", "dpgraph");
+            JQDatePicker jqdp = new JQDatePicker(usr.Txt(Loc.DATE), "dpinput", "dpgraph");
             out.print(jqdp.Render());
             
             Actions act = new Actions(null);
