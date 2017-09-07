@@ -14,6 +14,7 @@ import hg.html5.JQDatePicker;
 import hg.util.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -84,7 +85,14 @@ public class Main extends HttpServlet
         
         // A variable to keep track of the last selected tab.
         String atab = (String)sess.getAttribute(Sess.ACTIVE_TAB);
-        p.AddJSCode("var lastSelectedTab = " + atab + ";");
+        p.AddJSCode("var lastSelectedTab = " + atab + ";\n");
+        
+        // This holds the current date.
+        GregorianCalendar currDate = hot.getDateTime();
+        int cdY = currDate.get(GregorianCalendar.YEAR);
+        int cdM = currDate.get(GregorianCalendar.MONTH);
+        int cdD = currDate.get(GregorianCalendar.DAY_OF_MONTH);
+        p.AddJSCode("var currentDateDefinedByHotel = new Date(" + cdY + "," + cdM + "," + cdD + ");\n");
         
         // An extra div for decorative purposes.
         Div extraDiv = new Div("extra_main", null);

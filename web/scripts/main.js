@@ -1,3 +1,10 @@
+/* ====================================================================== 
+ * Variables created by the server:
+ *      currentDateDefinedByHotel
+ *      lastSelectedTab
+ * 
+ * ====================================================================== */
+
 // Wait for the page to load.
 jQuery(document).ready(InitMain);
 
@@ -32,10 +39,9 @@ function InitMain() {
 function trackTabLoad(event, ui) {
     var newTI = $( "#jqtabs" ).tabs( "option", "active" );
     if (newTI === 0) {
-        var the_date = new Date(2017,5,13);
         $('#dpgraph').datepicker($.datepicker.regional[""]);
         $('#dpgraph').datepicker("option", "dateFormat", "yy-mm-dd");
-        $('#dpgraph').datepicker('setDate', the_date);
+        $('#dpgraph').datepicker('setDate', currentDateDefinedByHotel);
     }
 }
 
