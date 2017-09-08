@@ -88,6 +88,7 @@ class graphTable
                 tr.setCellID(i, cellID);
                 
                 ResGuest foundGuestForRoomAndDay = null;
+                Res reservationOfGuest = null;
                 for (Res resv : resList) 
                     {
                     ArrayList<ResGuest> guestList = resv.getGuestList();
@@ -107,6 +108,7 @@ class graphTable
                             // This guest is booked for this room on this day,
                             // our search is over.
                             foundGuestForRoomAndDay = g;
+                            reservationOfGuest = resv;
                             break;
                             }
                         }
@@ -118,7 +120,18 @@ class graphTable
                 
                 if (foundGuestForRoomAndDay != null) 
                     {
-                    tr.setCell(i, CSS.CCELL_GRRES + " " + CSS.CCELL_GRRESERVATION, null);
+                    String custName = null;
+                    if (currentDate.getTime() == foundGuestForRoomAndDay.getArriveDate().getTime()) 
+                        {
+                        // We show the name of the customer in the cell which
+                        // represents the first day of the guests' stay.
+                        custName = reservationOfGuest.getCustomerName();
+                        if (custName.length() > 12) 
+                            {
+                            custName = custName.substring(0, 12);
+                            }
+                        }
+                    tr.setCell(i, CSS.CCELL_GRRES + " " + CSS.CCELL_GRRESERVATION, custName);
                     }
                 else 
                     {
