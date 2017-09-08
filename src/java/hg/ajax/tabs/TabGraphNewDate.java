@@ -1,19 +1,13 @@
 package hg.ajax.tabs;
 
-import hg.cons.CSS;
-import hg.cons.Loc;
-import hg.cons.Sess;
 import hg.db.Delphi;
-import hg.db.Hotel;
 import hg.db.User;
-import hg.html5.Actions;
-import hg.html5.Div;
-import hg.html5.JQDatePicker;
 import hg.html5.Table;
+import hg.util.AppLog;
 import hg.util.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /* ========================================================================= */
 /**
- * The Graph tab was selected.
- * 
+ * On the main page a user has selected a new date for the graph table.
  * @author hg
  */
 /* ========================================================================= */
-public class TabGraph extends HttpServlet
+public class TabGraphNewDate extends HttpServlet
     {
 
     /**
@@ -52,21 +45,18 @@ public class TabGraph extends HttpServlet
                 out.print("No user for session.");
                 return;
                 }
+            String strDate = request.getParameter("newGraphDate");
+            GregorianCalendar gcDate = Util.packedDateToGregorian(strDate);
             Delphi db = Delphi.Inst();
             
-            JQDatePicker jqdp = new JQDatePicker(usr.Txt(Loc.DATE), "dpinput", "dpgraph");
-            out.print(jqdp.Render());
-            
-            Actions act = new Actions(null);
-            act.AddAction("Create a reservation for the selected days", "javascript:alert('success')");
-            out.print(act.Render());
-            
-            Hotel hot = (Hotel)request.getSession(false).getAttribute(Sess.HOTEL);
-            Date toDay = hot.getDate();
-            Table tbl = graphTable.makeGraphTable(db, usr, toDay);
-            String debugString = tbl.Render();
-            
+            Table tbl = graphTable.makeGraphTable(db, usr, gcDate.getTime());
             out.print(tbl.Render());
+            }
+        catch (Exception ex) 
+            {
+            AppLog.Instance().Error("TabGraphNewDate: " + ex.getMessage());
+            out.flush();
+            out.print("Error: " + ex.getMessage());
             }
         finally
             {

@@ -268,6 +268,10 @@
         <servlet-name>TabGraph</servlet-name>
         <servlet-class>hg.ajax.tabs.TabGraph</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TabGraphNewDate</servlet-name>
+        <servlet-class>hg.ajax.tabs.TabGraphNewDate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -535,6 +539,10 @@
     <servlet-mapping>
         <servlet-name>TabGraph</servlet-name>
         <url-pattern>/TabGraph</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TabGraphNewDate</servlet-name>
+        <url-pattern>/TabGraphNewDate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

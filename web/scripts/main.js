@@ -21,7 +21,7 @@ function InitMain() {
         jQuery('#jqtabs').tabs({ activate: trackTabActivation });
         jQuery('#jqtabs').tabs({ load: trackTabLoad });
         
-        // This variable is defined on the server.
+        // This variable, lastSelectedTab, is defined on the server.
         jQuery('#jqtabs').tabs({ active: lastSelectedTab });
     }
     catch (e) {
@@ -42,6 +42,10 @@ function trackTabLoad(event, ui) {
         $('#dpgraph').datepicker($.datepicker.regional[""]);
         $('#dpgraph').datepicker("option", "dateFormat", "yy-mm-dd");
         $('#dpgraph').datepicker('setDate', currentDateDefinedByHotel);
+        
+        // Set the handler on the input field, only way 
+        // to catch changes to the date.
+        $("#dpgraph").bind("change", GraphDateChanged);
     }
 }
 
@@ -167,6 +171,48 @@ function TabInvoicesRowSelect(invoiceNo) {
  * ---------------------------------------------------------------------- */
 function TabCheckedinRowSelect(reservationID) {
     window.location = "Checkout?resID=" + reservationID;
+}
+
+
+
+/* ----------------------------------------------------------------------
+ * 
+ * The date for the graph has changed, reload the table showing the week.
+ *
+ * ---------------------------------------------------------------------- */
+function GraphDateChanged() {
+    var newGraphDate = $("#dpgraph").datepicker("getDate");
+    // nhDateToString is in nh.js
+    var dateCompactString = nhDateToString(newGraphDate);
+    var params = "newGraphDate=" + dateCompactString;
+    
+    // Make the ajax call.
+    jQuery.ajax({
+        url: "TabGraphNewDate",
+        cache: false,
+        data: params,
+
+        /* Callback for success. */
+        success:  function(data)
+            {
+            // The jQuery code returns success even though it could not
+            // contact the server, so we check for an empty dataset.
+            if (data.length === 0) {
+                alert(errNoContact);
+                return;
+            }
+            // If the first letter is a capital e then it is an error message.
+            var firstChar = data.substring(0, 1);
+            if (firstChar === "E") {
+                alert(data);
+                return;
+            }
+            // Put the table into the div which wraps it.
+            $(".graphwrap").html(data);
+            },
+
+        error: CallbackError
+    });
 }
 
 /* ----------------------------------------------------------------------

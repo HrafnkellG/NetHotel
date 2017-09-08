@@ -17,7 +17,7 @@ public class Div extends Widget
         {
         if (! Util.StringOK(cssClass)) 
             {
-            throw new IllegalArgumentException("CSS ID missing.");
+            throw new IllegalArgumentException("CSS class is missing.");
             }
         if (content != null) 
             {

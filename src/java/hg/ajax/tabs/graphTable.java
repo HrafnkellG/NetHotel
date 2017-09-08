@@ -51,7 +51,7 @@ class graphTable
             }
         
         // Create the table.
-        Table t = new Table(colh, CSS.CNHTABLE); 
+        Table t = new Table(colh, CSS.CGRAPHWRAP); 
         TableHead th = t.getHead();
         th.setCellCSS(0, CSS.CCOL_GRROOMNO);
         th.setCellCSS(1, CSS.CCOL_GRWEEKDAY);

@@ -26,6 +26,8 @@ public interface CSS
     String CPANELSMALLNUMBER = "panelnum4chars";
     /** For closed invoices when displayed in a row. */
     String CINVCLOSED = "inv_closed";
+    /** Wrap for the table inside the graph tab on the main page. */
+    String CGRAPHWRAP = "graphwrap";
     
     String CPERIOD = "period";
     
