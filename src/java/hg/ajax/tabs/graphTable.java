@@ -120,18 +120,23 @@ class graphTable
                 
                 if (foundGuestForRoomAndDay != null) 
                     {
-                    String custName = null;
+                    String custName = reservationOfGuest.getCustomerName();
+                    String cellDispalyName = null;
                     if (currentDate.getTime() == foundGuestForRoomAndDay.getArriveDate().getTime()) 
                         {
                         // We show the name of the customer in the cell which
                         // represents the first day of the guests' stay.
-                        custName = reservationOfGuest.getCustomerName();
                         if (custName.length() > 12) 
                             {
-                            custName = custName.substring(0, 12);
+                            cellDispalyName = custName.substring(0, 12);
+                            }
+                        else 
+                            {
+                            cellDispalyName = custName;
                             }
                         }
-                    tr.setCell(i, CSS.CCELL_GRRES + " " + CSS.CCELL_GRRESERVATION, custName);
+                    tr.setCell(i, CSS.CCELL_GRRES + " " + CSS.CCELL_GRRESERVATION, cellDispalyName);
+                    tr.setCellTitle(i, custName);
                     }
                 else 
                     {

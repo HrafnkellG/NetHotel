@@ -147,6 +147,19 @@ public class TableRow extends Widget
         Cell c = _cells[cellNum];
         c.setCSSID(id);
         }
+    
+    /**
+     * Add an HTML 'title' tag to the cell.
+     */
+    public void setCellTitle(int cellNum, String title) 
+        {
+        if (cellNum < 0 || cellNum > (_cells.length - 1))
+            {
+            throw new IllegalArgumentException("cellNum is out of bounds.");
+            }
+        Cell c = _cells[cellNum];
+        c.setTitle(title);
+        }
 
     public void setCellClickEvent(int cellNum, String jsFunctionCall)
         {
@@ -175,6 +188,9 @@ public class TableRow extends Widget
     /* ********************************************************************* */
     private class Cell extends Widget
         {
+        /** The HTML 'title' tag. */
+        private String _title = null;
+        
         /** The value of the cell. */
         private String _value = "";
         
@@ -196,6 +212,20 @@ public class TableRow extends Widget
             if (Util.StringOK(val))
                 {
                 _value = val;
+                }
+            }
+        
+        /* --------------------------------------------------------------------- */
+        /**
+         * Set the 'title' tag for the cell.
+         * @param title The text for the title.
+         */
+        /* --------------------------------------------------------------------- */
+        public void setTitle(String title) 
+            {
+            if (Util.StringOK(title)) 
+                {
+                _title = title;
                 }
             }
         
@@ -242,6 +272,11 @@ public class TableRow extends Widget
             if (_clickEvent != null) 
                 {
                 sb.append(" onclick=\"").append(_clickEvent).append("\"");
+                }
+            
+            if (_title != null) 
+                {
+                sb.append(" title=\"").append(_title).append("\"");
                 }
             
             sb.append(">");
