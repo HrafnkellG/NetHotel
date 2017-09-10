@@ -136,7 +136,14 @@ class graphTable
                             }
                         }
                     tr.setCell(i, CSS.CCELL_GRRES + " " + CSS.CCELL_GRRESERVATION, cellDispalyName);
-                    tr.setCellTitle(i, custName);
+                    
+                    ArrayList<ResGuest> guestsInRoom = findAllGuests(foundGuestForRoomAndDay);
+                    String titleText = custName;
+                    for (ResGuest gir : guestsInRoom) 
+                        {
+                        titleText += "\n" + gir.getName();
+                        }
+                    tr.setCellTitle(i, titleText);
                     }
                 else 
                     {
@@ -148,5 +155,24 @@ class graphTable
             }//END-OF for (Room r : rooms) 
         
         return t;
+        }
+
+    private static ArrayList<ResGuest> findAllGuests(ResGuest targetGuest)
+        {
+        ArrayList<ResGuest> returnValue = new ArrayList();
+        String targetRoom = targetGuest.getRoomNo();
+        DBR resultOfQuery = Delphi.Inst().Reservation(targetGuest.getReservationID());
+        Res guestRes = (Res)resultOfQuery.Result();
+        ArrayList<ResGuest> guestList = guestRes.getGuestList();
+        
+        for  (ResGuest g : guestList) 
+            {
+            if (targetRoom.compareTo(g.getRoomNo()) == 0) 
+                {
+                returnValue.add(g);
+                }
+            }
+        
+        return returnValue;
         }
     }

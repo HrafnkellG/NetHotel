@@ -291,4 +291,9 @@ public class ResGuest
         return _dep;
         }
 
+    public String getName() 
+        {
+        return _name;
+        }
+    
     }
