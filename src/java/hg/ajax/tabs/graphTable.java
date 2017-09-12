@@ -121,21 +121,21 @@ class graphTable
                 if (foundGuestForRoomAndDay != null) 
                     {
                     String custName = reservationOfGuest.getCustomerName();
-                    String cellDispalyName = null;
+                    String cellDisplayName = null;
                     if (currentDate.getTime() == foundGuestForRoomAndDay.getArriveDate().getTime()) 
                         {
                         // We show the name of the customer in the cell which
                         // represents the first day of the guests' stay.
                         if (custName.length() > 12) 
                             {
-                            cellDispalyName = custName.substring(0, 12);
+                            cellDisplayName = custName.substring(0, 12);
                             }
                         else 
                             {
-                            cellDispalyName = custName;
+                            cellDisplayName = custName;
                             }
                         }
-                    tr.setCell(i, CSS.CCELL_GRRES + " " + CSS.CCELL_GRRESERVATION, cellDispalyName);
+                    tr.setCell(i, CSS.CCELL_GRRES + " " + CSS.CCELL_GRRESERVATION, cellDisplayName);
                     
                     ArrayList<ResGuest> guestsInRoom = findAllGuests(foundGuestForRoomAndDay);
                     String titleText = custName;
@@ -148,6 +148,7 @@ class graphTable
                 else 
                     {
                     tr.setCell(i, CSS.CCELL_GRRES, null);
+                    tr.setCellClickEvent(i, "TabGraphCellClickFree(this, '" + cellID + "')");
                     }
                 currentDate = Util.DateAddDays(currentDate, 1);
                 }//END-OF for (int i=1; i<=7; i++)

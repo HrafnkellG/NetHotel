@@ -58,7 +58,7 @@ public class TabGraph extends HttpServlet
             out.print(jqdp.Render());
             
             Actions act = new Actions(null);
-            act.AddAction("Create a reservation for the selected days", "javascript:alert('success')");
+            act.AddAction("Create a reservation for the selected days", "javascript:TabGraphNewReservation()");
             out.print(act.Render());
             
             Hotel hot = (Hotel)request.getSession(false).getAttribute(Sess.HOTEL);

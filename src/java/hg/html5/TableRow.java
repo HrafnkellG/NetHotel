@@ -195,11 +195,11 @@ public class TableRow extends Widget
         private String _value = "";
         
         /** The CSS class names, if any. */
-        private String _cssClassNames;
+        private String _cssClassNames = null;
         
-        private String _cellCSSID;
+        private String _cellCSSID = null;
         
-        private String _clickEvent;
+        private String _clickEvent = null;
         
         /* --------------------------------------------------------------------- */
         /**
